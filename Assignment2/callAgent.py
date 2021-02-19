@@ -1,6 +1,6 @@
 # Module imports
 # import trie structure module
-import pygtrie
+import pytrie
 # Regular expressions operations module
 import re
 # Abstract Syntax Trees module
@@ -53,7 +53,15 @@ class CallAgent:
                     lem_name = re.sub('[^a-zA-Z0-9 \n]', ' ', lem.name())
                     synonyms.append(lem_name)
             # Add all the synonyms to the list
-            list_syn.append(set(synonyms))
+            # print(synonyms)
+            if not synonyms:
+                # print(words)
+                words = re.sub('[^a-zA-Z0-9 \n]', ' ', words)
+                synonyms.append(words)
+                list_syn.append(set(synonyms))
+                # print(list_syn)
+            else:
+                list_syn.append(set(synonyms))
         file.close()
 
         for i in range(0, len(key), 1):
@@ -64,18 +72,20 @@ class CallAgent:
     def get_responses(self):
         return self.responses
 
-    # fucntion to get dictionary of keywords
+    # function to get dictionary of keywords
     def get_keywords(self):
         return self.keywords
 
-    def run(self):
+    def unused(self):
         while True:
             # user enters a prompt
             userprompt = input("Enter some text:")
+            userprompt = re.sub('[^a-zA-Z0-9 \n]', ' ', userprompt)
             # iterate through keywords
             for key in self.keywords:
                 # iterate through synonyms associated with a keyword
                 for syn in self.keywords[key]:
+                    # print(syn)
                     # check to see if any of the synonyms are in the userprompt
                     if syn in userprompt.lower():
                         # exit if the user wants to quit
@@ -86,12 +96,16 @@ class CallAgent:
                             # response with the phrase associated with that keyword
                             print(self.responses[key])
 
+    def run(self):
+        while True:
+            return
+
 
 def main():
     ca = CallAgent("responses.txt", "keywords.txt")
     # print(ca.get_responses())
     # print(ca.get_keywords())
-    ca.run()
+    ca.unused()
 
 
 if __name__ == "__main__":

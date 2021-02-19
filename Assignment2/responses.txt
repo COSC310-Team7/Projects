@@ -2,3 +2,4 @@ greet:Hello! How can I help you?
 timings:We are open from 9AM to 5PM, Monday to Friday. We are closed on weekends and public holidays.
 fallback:I dont quite understand. Could you repeat that?
 quit:Thank you, have a nice day.
+cstart:Okay, first can you turn off the power on the back of the power supply and unplug it. Did it work?
