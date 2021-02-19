@@ -4,7 +4,7 @@ import pytrie
 # Regular expressions operations module
 import re
 # Abstract Syntax Trees module
-import ast
+# import ast
 # Natural language tool kit module
 from nltk.corpus import wordnet as wn
 
@@ -29,9 +29,9 @@ class CallAgent:
         # Split each line at the colon
         # Add to dictionary
         for word in contents:
-            (key, phrase) = word.split(":")
+            (responseType, phrase) = word.split(":")
             # Ensure to remove any unnecessary characters
-            self.responses[key] = phrase.strip("\n")
+            self.responses[responseType] = phrase.strip("\n")
         file.close()
 
     def generate_keywords(self, file):
@@ -82,19 +82,19 @@ class CallAgent:
             userprompt = input("Enter some text:")
             userprompt = re.sub('[^a-zA-Z0-9 \n]', ' ', userprompt)
             # iterate through keywords
-            for key in self.keywords:
+            for responseType in self.keywords:
                 # iterate through synonyms associated with a keyword
-                for syn in self.keywords[key]:
+                for syn in self.keywords[responseType]:
                     # print(syn)
                     # check to see if any of the synonyms are in the userprompt
                     if syn in userprompt.lower():
                         # exit if the user wants to quit
-                        if key == "quit":
-                            print(self.responses[key])
+                        if responseType == "quit":
+                            print(self.responses[responseType])
                             return
                         else:
                             # response with the phrase associated with that keyword
-                            print(self.responses[key])
+                            print(self.responses[responseType])
 
     def run(self):
         while True:
