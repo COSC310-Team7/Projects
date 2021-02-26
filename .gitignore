@@ -81,3 +81,8 @@ __pycache__/
 
 # Node Modules
 node_modules/
+
+# Neural Net model and pickle files
+Assignment2/NeuralNet/chatbotmodel.h5
+Assignment2/NeuralNet/responseType.pk1
+Assignment2/NeuralNet/keys.pk1
