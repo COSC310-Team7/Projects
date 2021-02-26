@@ -12,7 +12,6 @@ from nltk.corpus import wordnet as wn
 class CallAgent:
     """
     This is a class for the call agent where the inputs and responses are compiled and generated
-
     Attributes:
         responses (dict): Dictionary of intent and corresponding response
         keywords (dict): Dictionary of intent and corresponding set of synonyms
@@ -23,7 +22,6 @@ class CallAgent:
     def __init__(self, responsefile, keywordfile):
         """
         The constructor for CallAgent class
-
         Parameters:
             responsefile (str): The name of the txt file containing intent:response pairs
             keywordfile (str): The name of the txt file containing keywords for synonyms to generate
@@ -34,7 +32,6 @@ class CallAgent:
     def generate_repsonses(self, file):
         """
         The function to parse the response file and store intent and response pairs in a dict
-
         Parameters:
             file (str):  The name of the txt file containing intent:response pairs
         Sets Attribute:
@@ -59,7 +56,6 @@ class CallAgent:
         The function to parse the keyword file and generate synonyms for each keyword
         The 'keyword:synonym list' pairs are stored in a dict
         The keyword is replaced by its corresponding intent, making it 'intent:synonym list'
-
         Parameters:
             file (str): The name of the txt file containing keywords
         Sets Attribute:
@@ -102,7 +98,6 @@ class CallAgent:
     def get_responses(self):
         """
         The function to return the dict of intent:response pairs
-
         Returns:
              responses (dict): Dictionary of intent and corresponding response
         """
@@ -112,7 +107,6 @@ class CallAgent:
     def get_keywords(self):
         """
         The function to return the dict of 'intent:synonym list' pairs
-
         Returns:
              keywords (dict): Dictionary of intent and corresponding set of synonyms
         """
@@ -122,7 +116,6 @@ class CallAgent:
         """
         The function to take user input and iterate through the lists of synonyms to find a match
         A response is printed corresponding to its matching intent and synonym.
-
         user types 'quit' to stop
         """
         while True:
@@ -154,6 +147,7 @@ def main():
     # print(ca.get_responses())
     # print(ca.get_keywords())
     ca.unused()
+
 
 if __name__ == "__main__":
     main()

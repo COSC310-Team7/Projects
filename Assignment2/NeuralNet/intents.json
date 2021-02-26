@@ -1,0 +1,35 @@
+{"intents": [
+        {"tag": "greetings",
+         "patterns": ["Hi", "How are you", "Is anyone there?", "Hello", "Hey", "What's up", "Good day"],
+         "responses": ["Hello", "Hey!", "How can I help?"]
+        },
+        {"tag": "goodbye",
+         "patterns": ["Bye", "See you later", "Goodbye"],
+         "responses": ["See you later, thanks for visiting", "Have a nice day", "Bye! Come back again soon."]
+        },
+        {"tag": "thanks",
+         "patterns": ["Thanks", "Thank you", "That's helpful"],
+         "responses": ["Happy to help!", "Any time!", "My pleasure"]
+        },
+        {"tag": "age",
+         "patterns": ["How old", "What is your age?", "How old are you?", "Age?"],
+         "responses": ["I am 23 years old", "23 years old!"]
+        },
+        {"tag": "name",
+         "patterns": ["What is your name?", "What should I call you?", "What's your name?", "Who are you?", "Can you tell me your name?"],
+         "responses": ["You can call me Neural!", "I'm Neural", "I'm Neural the chat bot!"]
+        },
+        {"tag": "opentoday",
+         "patterns": ["Are you open today?", "When do you open today?", "What are your hours today?"],
+         "responses": ["We're open every day from 9am-9pm", "Our hours are 9am-9pm every day"]
+        },
+        {"tag": "hours",
+         "patterns": ["What hours are you open?", "What are your hours?", "When are you open?" ],
+         "responses": ["We're open every day 9am-9pm", "Our hours are 9am-9pm every day"]
+        },
+        {"tag": "issues",
+         "patterns": ["I am having problems", "I am having issues", "Can you help me?", "I am having computer issues" ],
+         "responses": ["What sort of issues are you having? (Hardware or software)", "Are you experiencing Hardware or Software problems?"]
+        }
+          ]
+}
