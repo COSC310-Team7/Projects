@@ -70,7 +70,6 @@ fabric.properties
 
 # End of https://www.gitignore.io/api/intellij
 
-### Garry Bilkhu ###
 
 # Python
 __pycache__/
@@ -82,7 +81,3 @@ __pycache__/
 # Node Modules
 node_modules/
 
-# Neural Net model and pickle files
-Assignment2/NeuralNet/chatbotmodel.h5
-Assignment2/NeuralNet/responseType.pk1
-Assignment2/NeuralNet/keys.pk1
