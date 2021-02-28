@@ -107,6 +107,8 @@ def getResponse(intentList, intentJSON):
 
 # run the chat bot
 def main():
+    print("Welcome, we are here to help you with your computer issues. Please type \"Hello\" "
+          "or the type of issue you are having, to begin.")
     while True:
         userinput = input("Enter text: ")
         ints = predictResponse(userinput)
