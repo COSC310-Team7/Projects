@@ -26,7 +26,7 @@
 
         {"tag": "hours",
          "patterns": ["What hours are you open?", "What are your hours?", "When are you open?" ],
-         "responses": ["We're open every day 10am-6pm", "Our hours are 9am-9pm every day"]
+         "responses": ["We're open every day 10am-6pm", "Our hours are 10am-6pm every day"]
         },
         {"tag": "issues",
          "patterns": ["I am having computer problems", "Can you help me?", "I am having computer issues", "The computer has issues", "The computer isn't working", "my computer isn't working", "my computer has issues" ],
