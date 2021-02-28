@@ -36,7 +36,7 @@ def constructSentence(sentence):
     Returns:
             sentenceWords (str): a sentence that only contains stem words for the model to use
     """
-    sentenceWords = nltk.word_tokenize(sentence)
+    sentenceWords = nltk.word_tokenize(sentence.lower())
     sentenceWords = [lemmatizer.lemmatize(word) for word in sentenceWords]
     return sentenceWords
 
@@ -104,9 +104,15 @@ def getResponse(intentList, intentJSON):
             break
     return result
 
+
 # run the chat bot
-while True:
-    userinput = input("Enter text:")
-    ints = predictResponse(userinput)
-    res = getResponse(ints, intents)
-    print(res)
+def main():
+    while True:
+        userinput = input("Enter text: ")
+        ints = predictResponse(userinput)
+        res = getResponse(ints, intents)
+        print("Agent: " + res)
+
+
+if __name__ == '__main__':
+    main()
