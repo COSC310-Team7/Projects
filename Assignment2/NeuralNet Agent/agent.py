@@ -15,105 +15,128 @@ from nltk.stem import WordNetLemmatizer
 # Tensorflow models module to load in the model we trained
 from tensorflow.keras.models import load_model
 
-# Create a lemmatizer object
-lemmatizer = WordNetLemmatizer()
 
-# read in intents.json file
-intents = json.loads(open('intents.json').read())
-
-# load in the keys, and responseType from the pickle files and load the saved model
-keys = pickle.load(open('keys.pk1', 'rb'))
-responseType = pickle.load(open('responseType.pk1', 'rb'))
-model = load_model('chatbotmodel.h5')
-
-
-def constructSentence(sentence):
+class Agent:
     """
-    This is a function takes sentence and deconstructs it into its words, and breaks
-    each word into it's stem word.
-    Parameters:
+        The class contains will contain the model that the chat bot will use to determine a response to user input.
+
+        Attributes:
+            lemmatizer (object): A wordnet lemmatizer object
+            intents (object): A JSON object containing all the structure of the neural net model
+            tags (list): A list containing all the response type tags from a pickle object.
+            responses (list): A list containing all the responses from a pickle object.
+            model (object): An object containing a trained model
+
+        Methods:
+            train(): trains the bot using a Neural net.
+        """
+
+    # Object constructor
+    def __init__(self):
+        # Create a lemmatizer object
+        self.lemmatizer = WordNetLemmatizer()
+        # read in intents.json file
+        self.intents = json.loads(open('intents.json').read())
+        # load in the tags, and responses from the pickle files and load the saved model
+        self.tags = pickle.load(open('tags.pk1', 'rb'))
+        self.responses = pickle.load(open('responses.pk1', 'rb'))
+        self.model = load_model('chatbotmodel.h5')
+
+    def constructSentence(self, sentence):
+        """
+        This is a function takes sentence and deconstructs it into its words, and breaks
+        each word into it's stem word.
+        Parameters:
             sentence (str): a sentence from user input
-    Returns:
-            sentenceWords (str): a sentence that only contains stem words for the model to use
-    """
-    sentenceWords = nltk.word_tokenize(sentence.lower())
-    sentenceWords = [lemmatizer.lemmatize(word) for word in sentenceWords]
-    return sentenceWords
+        Returns:
+            separatedWords (list): a list containing individual root words of a given sentence
+        """
+        separatedWords = nltk.word_tokenize(sentence.lower())
+        separatedWords = [self.lemmatizer.lemmatize(word) for word in separatedWords]
+        return separatedWords
 
-
-def bagWords(sentence):
-    """
-    This is a function takes sentence and uses the constructSentence function and creates a
-    bag of words (the same length as the keys) and constructs an array to match a response to
-    this set of words
-    Parameters:
+    def bagWords(self, sentence):
+        """
+        This is a function takes sentence and uses the constructSentence function and creates a
+        bag of words (the same length as the tags) and constructs an array to match a response to
+        this set of words
+        Parameters:
             sentence (str): a sentence from user input
-    Returns:
+        Returns:
             bag (numpy array): an numpy array for the model
-    """
-    sentenceWords = constructSentence(sentence)
-    bag = [0] * len(keys)
+        """
+        separatedWords = self.constructSentence(sentence)
+        bag = [0] * len(self.tags)
 
-    for word in sentenceWords:
-        # enumerate the list of keys
-        for i, key in enumerate(keys):
-            # if a key matches a word, set the bag at the given index to 1
-            if key == word:
-                bag[i] = 1
+        # each word in the list
+        for word in separatedWords:
+            # enumerate the list of tags
+            for (i, key) in enumerate(self.tags):
+                # if a key matches a word, set the bag at the given index to 1
+                if key == word:
+                    bag[i] = 1
 
-    return np.array(bag)
+        return np.array(bag)
 
-
-def predictResponse(sentence):
-    """
-    This is a function takes sentence and uses the bagWords function and predicts the responseType
-    Parameters:
+    def predictResponse(self, sentence):
+        """
+        This is a function takes sentence and uses the bagWords function and predicts the responses
+        Parameters:
             sentence (str): a sentence from user input
-    Returns:
-            returnList (list): a list with responseType, and probability of that being the closest responseType
-    """
-    bow = bagWords(sentence)
-    predictModel = model.predict(np.array([bow]))[0]
-    # Specify the error threshold
-    ERROR_THRESHOLD = 0.25
-    results = [[i, r] for i, r in enumerate(predictModel) if r > ERROR_THRESHOLD]
+        Returns:
+            potentialResponses (list): a list with responses, and probability of that being the closest responses
+        """
+        bow = self.bagWords(sentence)
+        predictionModel = self.model.predict(np.array([bow]))[0]
+        # Specify the error threshold
+        ERROR_THRESHOLD = 0.25
+        predictedResponses = [[i, r] for i, r in enumerate(predictionModel) if r > ERROR_THRESHOLD]
 
-    results.sort(key=lambda x: x[1], reverse=True)
-    returnList = []
-    for r in results:
-        returnList.append({'intent': responseType[r[0]], 'probability': str(r[1])})
-    return returnList
+        predictedResponses.sort(key=lambda x: x[1], reverse=True)
+        potentialReponses = []
+        for r in predictedResponses:
+            potentialReponses.append({'intent': self.responses[r[0]], 'probability': str(r[1])})
+        return potentialReponses
 
+    def getResponse(self, userSentence):
+        """
+        This is a function takes the user input, retrieves the tags from the JSON
+        and checks if it matches the tags from intents list and chooses a random response
+        (of the appropriate responses) to return to the user
+        Parameters:
+            userSentence (list): a sentence from user input
+        Returns:
+            idealResponse (list): a randomly selected response to the user input
+        """
+        tag = userSentence[0]['intent']
+        intents = self.intents['intents']
+        for group in intents:
+            if group['tag'] == tag:
+                idealResponse = random.choice(group['responses'])
+                break
+        return idealResponse
 
-def getResponse(intentList, intentJSON):
-    """
-    This is a function takes the intentList and intentJSON, retrieves the tags from the JSON
-    and checks if it matches the tags from intentList and chooses a random response
-    (of the appropriate responses) to return to the user
-    Parameters:
-            intentList (list): a sentence from user input
-            intentJSON (list): a json object
-    Returns:
-            result (list): a randomly selected response to the user input
-    """
-    tag = intentList[0]['intent']
-    listIntents = intentJSON['intents']
-    for i in listIntents:
-        if i['tag'] == tag:
-            result = random.choice(i['responses'])
-            break
-    return result
+    def run(self):
+        """
+        This function receives user input, and uses the predictResponse function to determine what the user's intention
+        is, then uses the getresponse function to determine an ideal response to return.
+        """
+
+        print("Welcome, we are here to help you with your computer issues. Please type \"Hello\" "
+              "or the type of issue you are having, to begin.")
+        while True:
+            userInput = input("Enter text: ")
+            if userInput.lower() == 'quit':
+                break
+            intentions = self.predictResponse(userInput)
+            botResponse = self.getResponse(intentions)
+            print("Agent: " + botResponse)
 
 
 # run the chat bot
 def main():
-    print("Welcome, we are here to help you with your computer issues. Please type \"Hello\" "
-          "or the type of issue you are having, to begin.")
-    while True:
-        userinput = input("Enter text: ")
-        ints = predictResponse(userinput)
-        res = getResponse(ints, intents)
-        print("Agent: " + res)
+    chatBot = Agent()
+    chatBot.run()
 
 
 if __name__ == '__main__':
