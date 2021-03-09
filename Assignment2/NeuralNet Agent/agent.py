@@ -21,14 +21,18 @@ class Agent:
         The class contains will contain the model that the chat bot will use to determine a response to user input.
 
         Attributes:
-            lemmatizer (object): A wordnet lemmatizer object
-            intents (object): A JSON object containing all the structure of the neural net model
+            lemmatizer (object): A wordnet lemmatizer object.
+            intents (object): A JSON object containing all the structure of the neural net model.
             tags (list): A list containing all the response type tags from a pickle object.
             responses (list): A list containing all the responses from a pickle object.
-            model (object): An object containing a trained model
+            model (object): An object containing a trained model.
 
         Methods:
-            train(): trains the bot using a Neural net.
+            constructSentence(): deconstructs sentences into their root words.
+            bagWords(): uses the deconstructed sentence to a series of words and maps it to a matching tag.
+            predictResponse(): uses the chatbot model to return a response, with an associated probability.
+            getResponse(): returns random bot response that has a greater probability than the minimum threshold.
+            run(): runs the chatbot.
         """
 
     # Object constructor
@@ -58,8 +62,8 @@ class Agent:
     def bagWords(self, sentence):
         """
         This is a function takes sentence and uses the constructSentence function and creates a
-        bag of words (the same length as the tags) and constructs an array to match a response to
-        this set of words
+        bag of words (the same length as the tags), that is, it constructs an array with zeros everywhere
+        except where the tags matches a word from the sentence.
         Parameters:
             sentence (str): a sentence from user input
         Returns:
@@ -72,6 +76,7 @@ class Agent:
         for word in separatedWords:
             # enumerate the list of tags
             for (i, key) in enumerate(self.tags):
+                # print("This is the key:", key)
                 # if a key matches a word, set the bag at the given index to 1
                 if key == word:
                     bag[i] = 1

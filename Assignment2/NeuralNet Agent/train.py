@@ -26,8 +26,8 @@ class Model:
     The class contains will contain the model that the chat bot will use to determine a response to user input.
 
     Attributes:
-        lemmatizer (object): A wordnet lemmatizer object
-        intents (object): A JSON object containing all the structure of the neural net model
+        lemmatizer (object): A wordnet lemmatizer object.
+        intents (object): A JSON object containing all the structure of the neural net model.
         tags (list): A list containing all the response type tags from the intents object.
         responses (list): A list containing all the responses from the intents object.
         patterns (list): A list containing a sample of user inputs for a particular tag from the intents object.
@@ -51,7 +51,7 @@ class Model:
 
     def train(self):
         # list containing punctuation to Ignore
-        ignoreChars = ['?', '!', '.', ',']
+        ignoreChars = ['?', '!', '.', ',', '\'']
         # iterate through the dictionary
         for intent in self.intents['intents']:
             # find each list of patterns
