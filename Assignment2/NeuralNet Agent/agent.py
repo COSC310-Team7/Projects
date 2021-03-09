@@ -48,7 +48,7 @@ class Agent:
 
     def constructSentence(self, sentence):
         """
-        This is a function takes sentence and deconstructs it into its words, and breaks
+        This is a methods takes sentence and deconstructs it into its words, and breaks
         each word into it's stem word.
         Parameters:
             sentence (str): a sentence from user input
@@ -61,7 +61,7 @@ class Agent:
 
     def bagWords(self, sentence):
         """
-        This is a function takes sentence and uses the constructSentence function and creates a
+        This is a methods takes sentence and uses the constructSentence methods and creates a
         bag of words (the same length as the tags), that is, it constructs an array with zeros everywhere
         except where the tags matches a word from the sentence.
         Parameters:
@@ -85,7 +85,7 @@ class Agent:
 
     def predictResponse(self, sentence):
         """
-        This is a function takes sentence and uses the bagWords function and predicts the responses
+        This is a methods takes sentence and uses the bagWords methods and predicts the responses
         Parameters:
             sentence (str): a sentence from user input
         Returns:
@@ -105,7 +105,7 @@ class Agent:
 
     def getResponse(self, userSentence):
         """
-        This is a function takes the user input, retrieves the tags from the JSON
+        This is a methods takes the user input, retrieves the tags from the JSON
         and checks if it matches the tags from intents list and chooses a random response
         (of the appropriate responses) to return to the user
         Parameters:
@@ -123,8 +123,8 @@ class Agent:
 
     def run(self):
         """
-        This function receives user input, and uses the predictResponse function to determine what the user's intention
-        is, then uses the getresponse function to determine an ideal response to return.
+        This methods receives user input, and uses the predictResponse methods to determine what the user's intention
+        is, then uses the getresponse methods to determine an ideal response to return.
         """
 
         print("Welcome, we are here to help you with your computer issues. Please type \"Hello\" "
