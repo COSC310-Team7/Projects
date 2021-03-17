@@ -63,6 +63,7 @@ class Model:
                 # add each list of wordlist and the associated tag to patterns
                 self.patterns.append((wordList, intent['tag']))
 
+                # print(patterns)
                 if intent['tag'] not in self.responses:
                     # add tag to responses
                     self.responses.append(intent['tag'])
@@ -71,7 +72,7 @@ class Model:
         # remove punctuation
         self.tags = [self.lemmatizer.lemmatize(word) for word in self.tags if word not in ignoreChars]
 
-        # print(self.tags)
+        print(self.tags)
         # sort tags list
         self.tags = sorted(set(self.tags))
 
