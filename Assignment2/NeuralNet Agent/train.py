@@ -41,7 +41,7 @@ class Model:
         # Create a lemmatizer object
         self.lemmatizer = WordNetLemmatizer()
         # read in intents.json file
-        self.intents = json.loads(open('intents.json').read())
+        self.intents = json.loads(open('c:/Users/droga/Desktop/UBCO/COSC minor/COSC 310/Assignments/Github/Projects/Assignment2/NeuralNet Agent/intents.json').read())
         # tags contains the list of all tags
         self.tags = []
         # responses contains the list of responses

@@ -40,7 +40,7 @@ class Agent:
         # Create a lemmatizer object
         self.lemmatizer = WordNetLemmatizer()
         # read in intents.json file
-        self.intents = json.loads(open('intents.json').read())
+        self.intents = json.loads(open('c:/Users/droga/Desktop/UBCO/COSC minor/COSC 310/Assignments/Github/Projects/Assignment2/NeuralNet Agent/intents.json').read())
         # load in the tags, and responses from the pickle files and load the saved model
         self.tags = pickle.load(open('tags.pk1', 'rb'))
         self.responses = pickle.load(open('responses.pk1', 'rb'))
