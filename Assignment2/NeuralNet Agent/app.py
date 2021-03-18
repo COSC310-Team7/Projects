@@ -12,19 +12,21 @@ TEXT_COLOR = "#EAECEE"
 FONT = "Helvetica 14"
 FONT_BOLD = "Helvetica 13 bold"
 
+
 class ChatApplication:
 
     def __init__(self):
         self.window = Tk()
         self._setup_main_window()
+        self.agent = Agent()
 
     def run(self):
         self.window.mainloop()
 
     def _setup_main_window(self):
         self.window.title("Chatbot")
-        self.window.resizable(width=False, height=False)
-        self.window.configure(width=470, height=550, bg=BG_COLOR)
+        self.window.resizable(width=True, height=True)
+        self.window.configure(width=600, height=550, bg=BG_COLOR)
 
         #head label
         head_label = Label(self.window, bg=BG_COLOR, fg=TEXT_COLOR,
@@ -75,7 +77,8 @@ class ChatApplication:
             self.text_widget.insert(END, msg1)
             self.text_widget.configure(state=DISABLED)
 
-            msg2 = f"{bot_name}: {getResponse(msg)}\n\n"
+            intentions = self.agent.predictResponse(msg)
+            msg2 = f"{bot_name}: {self.agent.getResponse(intentions)}\n\n"
             self.text_widget.configure(state=NORMAL)
             self.text_widget.insert(END, msg2)
             self.text_widget.configure(state=DISABLED)
