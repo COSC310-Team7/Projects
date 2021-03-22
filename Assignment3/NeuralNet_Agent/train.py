@@ -21,7 +21,7 @@ from tensorflow.keras.layers import Dense, Activation, Dropout
 from tensorflow.keras.optimizers import SGD
 
 
-class Model:
+class TrainModel:
     """
     The class contains will contain the model that the chat bot will use to determine a response to user input.
 
@@ -150,8 +150,8 @@ class Model:
 
 
 def main():
-    agent = Model()
-    agent.train()
+    model = TrainModel()
+    model.train()
 
 
 if __name__ == "__main__":
