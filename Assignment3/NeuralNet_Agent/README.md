@@ -31,7 +31,7 @@ The Agent class is located in the agent.py file. The Agent class has the followi
   * ```responses (list): A list containing all the responses from a pickle object.```
   * ```model (object): An object containing a trained model.```
 * Methods:
-  * ```constructSentence(): deconstructs sentences into their root words.```
+  * ```deconstructSentence(): deconstructs sentences into their root words.```
   * ```bagWords(): uses the deconstructed sentence to a series of words and maps it to a matching tag.```
   * ```predictResponse(): uses the chatbot model to return a response, with an associated probability.```
   * ```getResponse(): returns random bot response that has a greater probability than the minimum threshold.```
@@ -47,17 +47,19 @@ The Model class is located in the train.py file. The Agent class has the followi
   * ```patterns (list): A list containing a sample of user inputs for a particular tag from the intents object.```
 * Methods:
   * ```train(): trains the bot using a Neural net.```
+### Note: Make sure you are using a version of python 3.8, python 3.9 has compatibility issues.
 
-## Compiling Neural Net
+## Compile training data for the chatbot
 * Compile train.py (Only have to do this once, unless changes are made to the intents.json)
 * **Note**: Do not be concerned with errors thrown in command console, there are some issues with the tensorflow library that do not affect the chatbot.
 
-## Running Neural Net
+## Running chatbot
 * Compile agent.py
 * **Note**: Do not be concerned with errors thrown in command console, there are some issues with the tensorflow library that do not affect the chatbot.
 
 ## List of Files
 * **agent.py** *Runs the conversation agent program and takes in inputs to speak to it*
+* **agent_unittest.py** *Runs a unit test on the Agent class*
 * **train.py** *Compiles the data from the intents.json*
 * **intents.json** *Database that stores tags, corresponding patterns, corresponding responses*
 * **tags.pk1** *Stores the character stream of tags to be reconstructed later for the agent script*

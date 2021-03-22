@@ -21,7 +21,7 @@ from tensorflow.keras.layers import Dense, Activation, Dropout
 from tensorflow.keras.optimizers import SGD
 
 
-class TrainModel:
+class Model:
     """
     The class contains will contain the model that the chat bot will use to determine a response to user input.
 
@@ -72,7 +72,7 @@ class TrainModel:
         # remove punctuation
         self.tags = [self.lemmatizer.lemmatize(word) for word in self.tags if word not in ignoreChars]
 
-        print(self.tags)
+        # print(self.tags)
         # sort tags list
         self.tags = sorted(set(self.tags))
 
@@ -146,12 +146,12 @@ class TrainModel:
         # training the model 200 times, and save the model as an '.h5' model and print done
         chatbot = model.fit(np.array(trainX), np.array(trainY), epochs=300, batch_size=5, verbose=1)
         model.save('chatbotmodel.h5', chatbot)
-        print("Done")
+        return "Done"
 
 
 def main():
-    model = TrainModel()
-    model.train()
+    model = Model()
+    print(model.train())
 
 
 if __name__ == "__main__":

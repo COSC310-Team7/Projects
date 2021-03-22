@@ -47,12 +47,13 @@ The Model class is located in the train.py file. The Agent class has the followi
   * ```patterns (list): A list containing a sample of user inputs for a particular tag from the intents object.```
 * Methods:
   * ```train(): trains the bot using a Neural net.```
+### Note: Make sure you are using a version of python 3.8, python 3.9 has compatibility issues.
 
-## Compiling Neural Net
+## Compile training data for the chatbot
 * Compile train.py (Only have to do this once, unless changes are made to the intents.json)
 * **Note**: Do not be concerned with errors thrown in command console, there are some issues with the tensorflow library that do not affect the chatbot.
 
-## Running Neural Net
+## Running chatbot
 * Compile agent.py
 * **Note**: Do not be concerned with errors thrown in command console, there are some issues with the tensorflow library that do not affect the chatbot.
 
