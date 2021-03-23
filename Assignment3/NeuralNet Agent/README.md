@@ -1,4 +1,4 @@
-# Assignment 2
+# Assignment 3
 Computer science 310 Team 7
 
 This project is on a conversational agent that takes word or sentence input from a user and outputs an appropriate response. Our specific conversational agent is a computer tech support agent that answers hardware and software related issues. The program was written in Python.
