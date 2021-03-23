@@ -85,4 +85,7 @@ The ChatApplication class is located in the app.py file. This class has the foll
 * TensorFlow
 
 ## List of features
-* **GUI:** *Simple GUI developed to run the program where user can view converstation history.*
+Each features that will be mentioned below will include a rationale as to why it has been chosen and a snippet of the feature in action.
+
+### GUI
+Simple GUI developed to run the program where user can view converstation history. This allows for a cleaner interaction.
