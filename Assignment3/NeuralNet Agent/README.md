@@ -38,7 +38,7 @@ The Agent class is located in the agent.py file. The Agent class has the followi
   * ```run(): runs the chatbot.```
   
 ## Model Class
-The Model class is located in the train.py file. The Agent class has the following structure:
+The Model class is located in the train.py file. The Model class has the following structure:
 * Attributes:
   * ```lemmatizer (object): A wordnet lemmatizer object.```
   * ```intents (object): A JSON object containing all the structure of the neural net model.```
@@ -48,7 +48,17 @@ The Model class is located in the train.py file. The Agent class has the followi
 * Methods:
   * ```train(): trains the bot using a Neural net.```
 
-## ChatApplication Class
+## ChatApplication Class (GUI)
+The ChatApplication class is located in the app.py file. This class has the following strucure:
+* Attributes:
+  * ```window (object): A window object that holds the user interface.```
+  * ```agent (object): An object that references the agent class as an object.```
+* Methods:
+  * ```run(): runs the chatbot in the GUI window mainloop.```
+  * ```_setup_main_window(): A function of the window object that provides a title, window size and other features.```
+  * ```_on_enter_pressed(): calls _insert_message function whenever user presses the enter button after typing a message.```
+  * ```_insert_message(): takes a message and a sender as a parameter and inputs both message and response into the main message box. Note: calls on methods within agent.py as well.```
+
 
 ## Compiling Neural Net
 * Compile train.py (Only have to do this once, unless changes are made to the intents.json)

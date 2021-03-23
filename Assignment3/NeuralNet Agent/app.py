@@ -1,4 +1,4 @@
-#Import tkinter and getResponse function
+#Import tkinter and agent.py
 from tkinter import *
 from agent import *
 
