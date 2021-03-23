@@ -146,7 +146,7 @@ class Agent:
 # run the chat bot
 def main():
     chatBot = Agent()
-    print(chatBot.getResponse(chatBot.predictResponse("What hours are you open?")))
+    chatBot.run()
 
 
 if __name__ == '__main__':

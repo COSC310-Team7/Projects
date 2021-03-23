@@ -12,6 +12,8 @@ import numpy as np
 import nltk
 # Natural language tool kit stem module
 from nltk.stem import WordNetLemmatizer
+# Natural language tool kit corpus module -> for synonyms
+from nltk.corpus import wordnet
 
 # Import models from tensor, layers and optimizers modules
 from tensorflow.keras.models import Sequential
@@ -19,6 +21,11 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Activation, Dropout
 # Stochastic Gradient Descent optimization algorithm
 from tensorflow.keras.optimizers import SGD
+
+# spaCy Natural language processing -> for pos tagging
+import spacy
+# Import english model
+sp = spacy.load('en_core_web_sm')
 
 
 class Model:
@@ -33,6 +40,7 @@ class Model:
         patterns (list): A list containing a sample of user inputs for a particular tag from the intents object.
 
     Methods:
+        synonyms(str): returns a set of synonyms for nouns and adjectives in a given phrase
         train(): trains the bot using a Neural net.
     """
 
@@ -49,6 +57,44 @@ class Model:
         # patterns contains the list of patterns to look for in user input
         self.patterns = []
 
+    def synonyms(self, phrase):
+        """
+        Finds nouns and adjectives in a given phrase and gets the set of synonyms for these specific words
+
+        Parameters
+        phrase : string
+            The phrase in which to find nouns and adjectives from
+
+        Returns
+        set
+            A new set containing the synonyms of all nouns and adjectives of the input string
+
+        Examples
+        >>> synonyms("I am having software problems")
+        ['software', 'problem', 'trouble']
+        """
+        # Turn the string into an object with parts of speech tagging on each word
+        sen = sp(u"" + phrase)
+        # synonymset contains the set of synonyms
+        synonymset = set()
+
+        # iterate through the sentence
+        for word in sen:
+            if word.pos_ == "NOUN":
+                # print(f'{word.text:{12}} {word.pos_:{10}} {word.tag_:{8}} {spacy.explain(word.tag_)}')
+                # print(wordnet.synsets(word.text, pos=wordnet.NOUN))
+                # iterate through synonyms for a noun (actually finds different concepts of the noun)
+                for synonym in wordnet.synsets(word.text, pos=wordnet.NOUN):
+                    # cleanup the synonym to get the name only and add it to the set of synonyms
+                    partitioned_str = (synonym.name().partition('.'))
+                    synonymset.add(partitioned_str[0])
+            elif word.pos_ == "ADJ":
+                # iterate through synonyms for an adjective (actually finds synonyms of each adj concept)
+                for synonym in wordnet.synsets(word.text, pos=wordnet.ADJ):  # Each synset represents a diff concept.
+                    synonymset.update(synonym.lemma_names())
+
+        return synonymset
+
     def train(self):
         # list containing punctuation to Ignore
         ignoreChars = ['?', '!', '.', ',', '\'', '\'s', '\'m', 'n\'t']
@@ -58,6 +104,13 @@ class Model:
             for pattern in intent['patterns']:
                 # Split the sentence into individual words
                 wordList = nltk.word_tokenize(pattern)
+                # Get synonyms of nouns and adjectives in wordlist
+                synonymlist = self.synonyms(pattern)
+                # Add each synonym to the word list
+                wordList.extend(synonymlist)
+                print(pattern)
+                print(wordList)
+                print()
                 # add each word to the tags list
                 self.tags.extend(wordList)
                 # add each list of wordlist and the associated tag to patterns

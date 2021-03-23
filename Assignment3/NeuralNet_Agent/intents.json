@@ -4,7 +4,7 @@
          "responses": ["Hello", "Hey!", "Hi!", "Greetings friend", "Welcome fellow human"]
         },
         {"tag": "how_are_you",
-         "patterns": ["How are you?", "How's it going?", "How are you today?"],
+         "patterns": ["How are you?", "How is it going?", "How are you today?"],
          "responses": ["I'm good, thanks for asking. How can I help you?", "I'm doing well. How can I help?", "Another day in paradise! How can I be of assistance?"]
         },
         {"tag": "goodbye",
@@ -12,7 +12,7 @@
          "responses": ["See you later, thanks for visiting", "Have a nice day", "Bye! Come back again soon."]
         },
         {"tag": "thanks",
-         "patterns": ["Thanks", "Thank you", "That's helpful"],
+         "patterns": ["Thanks", "Thank you", "That is helpful"],
          "responses": ["Happy to help! Message us if you run into any other issues.", "Any time!", "My pleasure"]
         },
         {"tag": "age",
@@ -20,7 +20,7 @@
          "responses": ["I am 23 years old", "23 years old!"]
         },
         {"tag": "name",
-         "patterns": ["What is your name?", "What should I call you?", "What's your name?", "Who are you?", "Can you tell me your name?"],
+         "patterns": ["What is your name?", "What should I call you?", "What is your name?", "Who are you?", "Can you tell me your name?"],
          "responses": ["You can call me Steven!", "I'm Steven", "My name is Steven"]
         },
 
@@ -29,7 +29,7 @@
          "responses": ["We're open every day 10am-6pm", "Our hours are 10am-6pm every day"]
         },
         {"tag": "issues",
-         "patterns": ["I am having computer problems", "Can you help me?", "I am having computer issues", "The computer has issues", "The computer isn't working", "my computer isn't working", "my computer has issues" ],
+         "patterns": ["I am having computer problems", "Can you help me?", "I am having computer issues", "The computer has issues", "The computer is not working", "my computer is not working", "my computer has issues" ],
          "responses": ["What sort of issues are you having? (Hardware or software)", "Are you experiencing Hardware or Software problems?"]
         },
 
@@ -43,7 +43,7 @@
         },
 
         {"tag": "didnt_work",
-         "patterns": ["It didn't work", "The solution didn't work", "The computer still isn't working", "I am uncomfortable doing this part"],
+         "patterns": ["It did not work", "The solution did not work", "The computer still is not working", "I am uncomfortable doing this part"],
          "responses": ["You can bring your computer to the shop so we can better assist you?"]
         },
         {"tag": "worked",
@@ -69,11 +69,11 @@
          "responses": ["What is the problem with your display? Is it not turning on or does it look weird?"]
         },
         {"tag": "2a_off",
-         "patterns": ["The display won't turn on", "The monitor is not starting", "The screen is black"],
+         "patterns": ["The display will not turn on", "The monitor is not starting", "The screen is black"],
          "responses": ["Check that the cable is plugged from the monitor to the computer and that the power cable is plugged into the monitor."]
         },
-        {"tag": "2b_doesn't work",
-         "patterns": ["Plugging in the display doesn't work", "RePlugging in the monitor didn't work", "Re-plugging the display does not work"],
+        {"tag": "2b_does_not_work",
+         "patterns": ["Plugging in the display does not work", "RePlugging in the monitor did not work", "Re-plugging the display does not work"],
          "responses": ["We can look at your monitor at the shop and try to fix it"]
         },
         {"tag": "2c_looks_weird",
@@ -85,15 +85,15 @@
          "responses": ["The GPU will be plugged into the motherboard but on the most bottom portion of it."]
         },
         {"tag": "2d_gpu_plugged",
-         "patterns": ["Plugging into the gpu didn't work", "It was already plugged into the gpu", "I plugged the monitor into the gpu and it didn't work"],
+         "patterns": ["Plugging into the gpu did not work", "It was already plugged into the gpu", "I plugged the monitor into the gpu and it did not work"],
          "responses": ["Your graphic's card will have drivers that need to be installed."]
         },
         {"tag": "2e_gpu_drivers",
          "patterns": ["Where do I download the graphics card drivers from?", "Where can I find the graphics drivers?", "Where are the graphics drivers located"],
          "responses": ["Go to your manufacturers website and install the drivers for your gpu."]
         },
-        {"tag": "2e_gpu_drivers_didn't work",
-         "patterns": ["I downloaded and installed the graphics drivers but it didn't work", "The graphics drivers didn't work", "The graphics drivers didn't fix the problem"],
+        {"tag": "2e_gpu_drivers_did_not_work",
+         "patterns": ["I downloaded and installed the graphics drivers but it did not work", "The graphics drivers did not work", "The graphics drivers did not fix the problem"],
          "responses": ["Try testing your display with a different device. Otherwise please bring your computer into the shop so we can better assist you."]
         },
 
@@ -141,19 +141,19 @@
          "responses": ["First we will try reseating the ram. Push down on the clips on either side of the ram then pull it out and push it back in. You should hear a click."]
         },
         {"tag": "6b_where_ram",
-         "patterns": ["Where is the ram located?", "Where is the ram?", "I can't find the ram"],
+         "patterns": ["Where is the ram located?", "Where is the ram?", "I can not find the ram"],
          "responses": ["The ram will usually be at the top right of your motherboard. Next to your CPU where a big fan will be."]
         },
         {"tag": "6b_what_ram",
-         "patterns": ["What does ram look like?", "I don't know what ram is", "I don't know what ram looks like"],
+         "patterns": ["What does ram look like?", "I do not know what ram is", "I do not know what ram looks like", "What is the ram?"],
          "responses": ["Ram will be rectangular sticks inserted into your motherboard. It is inserted on the long end and sticks out. There will be 1-4 sticks of it."]
         },
         {"tag": "6c_reseated_ram",
          "patterns": ["The ram is reseated", "I replugged in the ram", "The ram is plugged in again"],
-         "responses": ["Plug in your computer and try turn it on. Tell me if the ram reseat didn't work"]
+         "responses": ["Plug in your computer and try turn it on. Tell me if the ram reseat did not work"]
         },
         {"tag": "6d_reseated_ram_didnt_work",
-         "patterns": ["Reseating the ram didn't work", "The computer still turns off after reseating ram", "Reseating didn't work"],
+         "patterns": ["Reseating the ram did not work", "The computer still turns off after reseating ram", "Reseating did not work"],
          "responses": ["Can you unplug the computer, take off the side panel, then tell me when your inside the case."]
         },
         {"tag": "6e_cables",
@@ -161,7 +161,7 @@
          "responses": ["Can you try pushing in the GPU and pushing in all the wires that connect between the motherboard and power supply."]
         },
         {"tag": "6e_what_gpu",
-         "patterns": ["What does gpu look like?", "I don't know what the gpu is", "I don't know what the gpu looks like"],
+         "patterns": ["What does gpu look like?", "I do not know what the gpu is", "I do not know what the gpu looks like"],
          "responses": ["The GPU will be one of the largest rectangular components that sticks out of the bottom of the motherboard."]
         },
         {"tag": "6f_pushed_cables",
@@ -170,7 +170,7 @@
         },
 
         {"tag": "7_nostart",
-         "patterns": ["Nothing happens turning on the computer", "The computer has no power", "The computer doesn't start", "Nothing happens when I turn on the computer" ],
+         "patterns": ["Nothing happens turning on the computer", "The computer has no power", "The computer does not start", "Nothing happens when I turn on the computer" ],
          "responses": ["The power supply on the back of the computer may not be plugged in or turned on, can you check that?"]
         },
         {"tag": "7a_pushed_power",
@@ -178,7 +178,7 @@
          "responses": ["Try turning on the computer and tell me if plugging in the power supply worked"]
         },
         {"tag": "7b_pushed_power_didnt_work",
-         "patterns": ["Plugging in the power supply didn't work", "Plugging in the power didn't work", "Turning on the power supply didn't work"],
+         "patterns": ["Plugging in the power supply did not work", "Plugging in the power did not work", "Turning on the power supply did not work"],
          "responses": ["Can you unplug the computer, take off the side panel, then tell me when your inside the case."]
         },
 
@@ -187,7 +187,7 @@
          "responses": ["Can you try replugging in the mouse or changing the battery if it is wireless, then tell me if that worked"]
         },
         {"tag": "8a_replug_mouse",
-         "patterns": ["Replugging the mouse didn't work", "The mouse is wired", "The mouse is not wireless", "The mouse is still not working" ],
+         "patterns": ["Replugging the mouse did not work", "The mouse is wired", "The mouse is not wireless", "The mouse is still not working" ],
          "responses": ["Try plugging the mouse into another usb slot. If it still doesn't work it may be the mouse. If it works then that usb may be broken"]
         },
         {"tag": "8b_fixing_mouse",
@@ -195,7 +195,7 @@
          "responses": ["If you bring it to the shop we may be able to fix it otherwise we can sell you a mouse"]
         },
         {"tag": "8b_fixing_usb",
-         "patterns": ["the usb is broken", "the usb doesn't work", "The usb is the one that's broken", "The usb is not working" ],
+         "patterns": ["the usb is broken", "the usb does not work", "The usb is the one that is broken", "The usb is not working" ],
          "responses": ["For now you will not be able to use that usb slot. If you bring your computer to the shop we can fix it."]
         },
 
@@ -216,11 +216,11 @@
          "responses": ["Try checking to see what processes are idly running in the background. Try to close them. Otherwise bring your computer to the shop and we'd be happy to take a look at it."]
         },
         {"tag": "11_crashing_and_opening_apps",
-         "patterns": ["The apps keep crashing", "The applications keep crashing", "Applications on my computer frequently crash", "The applications on my computer crash a lot", "The applications don't open", "The applications don't work", "The programs don't open", "The programs don't work"],
+         "patterns": ["The apps keep crashing", "The applications keep crashing", "Applications on my computer frequently crash", "The applications on my computer crash a lot", "The applications do not open", "The applications do not work", "The programs do not open", "The programs do not work"],
          "responses": ["Try uninstalling the applications are reinstalling them. Otherwise bring your computer to the shop and we'd be happy to take a look at it."]
         },
         {"tag": "12_storage_space",
-         "patterns": ["My computer storage is full", "The storage is filled", "My computer doesn't have much storage space", "My computer's drives are full"],
+         "patterns": ["My computer storage is full", "The storage is filled", "My computer does not have much storage space", "My computer drives are full"],
          "responses": ["Try removing some apps you don't need. You can use the 'disk cleanup' utility to help."]
         }
 ]
