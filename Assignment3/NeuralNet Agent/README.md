@@ -83,3 +83,6 @@ The ChatApplication class is located in the app.py file. This class has the foll
 * NumPy
 * NLTK
 * TensorFlow
+
+## List of features
+* **GUI:** *Simple GUI developed to run the program where user can view converstation history.*
