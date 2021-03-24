@@ -49,6 +49,18 @@ The Model class is located in the train.py file. The Agent class has the followi
   * ```train(): trains the bot using a Neural net.```
 ### Note: Make sure you are using a version of python 3.8, python 3.9 has compatibility issues.
 
+## ChatApplication Class (GUI)
+The ChatApplication class is located in the app.py file. This class has the following strucure:
+* Attributes:
+  * ```window (object): A window object that holds the user interface.```
+  * ```agent (object): An object that references the agent class as an object.```
+* Methods:
+  * ```run(): runs the chatbot in the GUI window mainloop.```
+  * ```_setup_main_window(): A function of the window object that provides a title, window size and other features.```
+  * ```_on_enter_pressed(): calls _insert_message function whenever user presses the enter button after typing a message.```
+  * ```_insert_message(): takes a message and a sender as a parameter and inputs both message and response into the main message box. Note: calls on methods within agent.py as well.```
+
+
 ## Compile training data for the chatbot
 * Compile train.py (Only have to do this once, unless changes are made to the intents.json)
 * **Note**: Do not be concerned with errors thrown in command console, there are some issues with the tensorflow library that do not affect the chatbot.
@@ -72,3 +84,9 @@ The Model class is located in the train.py file. The Agent class has the followi
 * NumPy
 * NLTK
 * TensorFlow
+
+## List of features
+Each features that will be mentioned below will include a rationale as to why it has been chosen and a snippet of the feature in action.
+
+### GUI
+Simple GUI developed to run the program where user can view converstation history. This allows for a cleaner interaction.
