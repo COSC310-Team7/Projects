@@ -5,17 +5,23 @@ This project is on a conversational agent that takes word or sentence input from
 
 The Neural Net uses a JSON file as a database and each entry contains a tag (the conversation category), a list of patterns (individually typed messages on what the user is likely to type), and a list of random responses the agent will pick at random to use. Training the Neural Net takes this data from the JSON and essentially matches the tags to the patterns and responses, it deconstructs the patterns into bags of words to match with inputs later, and it stores all this in a binary file for fast easy execution of the program. The Neural Net has a more sophisticated portion where it finds consistently appearing unique words in the patterns of a tag and it assigns a higher probability to this tag if an input matches with this unique word.  
 
+The bags of words was enhanced to increase the probability of matching with the expected intention. Stemming & lemmatization attempts to find the base or dictionary form of a word. It does simple stuff of stemming a word from 'cars' to 'car' and it also uses the proper vocabulary of a word to convert it from 'am, are, is' to 'be' using lemmatization. The purpose is to reduce the vocabulary of the model and attempt to find the more general meaning behind sentences. This is implemented using the NLTK.
+
+Another enhancement done to the bag of words was using part of speech (pos) tagging to find nouns and adjectives in the bag of words then finding synonyms of these words to add to the bag. This addition improves upon the basic patterns and sentence structure of the original intention and enhances it with an increased vocabulary. The original implementation recognized 'computer problems' as an input but the new implementation finds the synonym of 'problems' as 'issues' and now recognizes 'computer issues' as an input. This is implemented using the NLTK and spaCy natural language processing.
+
 When using the Neural Net, it gets some input from the user, converts the input into a bag of words and rids of uppercases and punctuation, compares the bag of input words to the bags of patterns, finds patterns with the most word matches and gets the most probable tag, then it picks a response from the list in the tag. 
 
 ## Setting up Neural Net Agent
-* Clone 'Assignment2' onto PC  
+* Clone 'Assignment3' onto PC  
 * Open the 'NeuralNet Agent' folder in a Python IDE  
 * In terminal enter: 
   > ```pip install nltk```  
   > ```pip install tensorflow```  
   > ```pip install pandas```  
   > ```pip install numpy```  
-  > ```pip install pickle```
+  > ```pip install pickle```  
+  > ```pip install -U spacy```  
+  > ```python -m spacy download en_core_web_sm```
 * In python terminal enter
   > ```import nltk```  
   > ```nltk.download()```  
@@ -46,6 +52,7 @@ The Model class is located in the train.py file. The Agent class has the followi
   * ```responses (list): A list containing all the responses from the intents object.```
   * ```patterns (list): A list containing a sample of user inputs for a particular tag from the intents object.```
 * Methods:
+  * ```synonym(str): adds to each pattern the synonyms of nouns and adjectives.```
   * ```train(): trains the bot using a Neural net.```
 ### Note: Make sure you are using a version of python 3.8, python 3.9 has compatibility issues.
 
@@ -73,6 +80,7 @@ The ChatApplication class is located in the app.py file. This class has the foll
 * **agent.py** *Runs the conversation agent program and takes in inputs to speak to it*
 * **agent_unittest.py** *Runs a unit test on the Agent class*
 * **train.py** *Compiles the data from the intents.json*
+* **playground.py** *Test file for visualizing functionality of POS tagging and synonym recognition*
 * **intents.json** *Database that stores tags, corresponding patterns, corresponding responses*
 * **tags.pk1** *Stores the character stream of tags to be reconstructed later for the agent script*
 * **responses.pk1** *Stores the character stream of responses to be reconstructed later for the agent script*
@@ -83,10 +91,22 @@ The ChatApplication class is located in the app.py file. This class has the foll
 * Pickle
 * NumPy
 * NLTK
+  * Stem
+  * Corpus
 * TensorFlow
+* spaCy
 
 ## List of features
 Each features that will be mentioned below will include a rationale as to why it has been chosen and a snippet of the feature in action.
 
 ### GUI
 Simple GUI developed to run the program where user can view converstation history. This allows for a cleaner interaction.
+
+### Stemming & Lemmatization
+Stemming & lemmatization attempts to find the base or dictionary form of a word. It does simple stuff of stemming a word from 'cars' to 'car' and it also uses the proper vocabulary of a word to convert it from 'am, are, is' to 'be' using lemmatization. The purpose is to reduce the vocabulary of the model and attempt to find the more general meaning behind sentences of the model and the input.
+
+### POS Tagging
+Parts of speech (pos) tagging uses ai to recognize a sentence structure and correctly label the pronouns, nouns, verbs, adjectives etc., of each word in a sentence. It was analyzed that replacing nouns and adjectives in a sentence with synonymous words still portrayed the correct sentence structure and intention. Pos tagging was used to find and single out these words that were given to the model.
+
+### Synonym Recognition
+Synonym recognition can gather a list of synonyms of a word depending on its intention as a verb, noun, adjective, etc. The nouns and adjectives found using pos tagging were used to get a list of their respective noun or adjective synonyms. It can recognize the noun of 'problems' in 'computer problems' and get the synonym as 'issues' and add it the the recognized input of that intention. This addition improves upon the basic patterns and sentence structure of the original recognized input pattern and enhances it with an increased vocabulary. 
