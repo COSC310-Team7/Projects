@@ -27,7 +27,6 @@ When using the Neural Net, it gets some input from the user, converts the input 
   > ```nltk.download()```  
   > ```nltk.download('wordnet')```  
   > ```nltk.download('punkt')```
-* Run '.py'  
 ## Agent Class
 The Agent class is located in the agent.py file. The Agent class has the following structure:
 * Attributes:
