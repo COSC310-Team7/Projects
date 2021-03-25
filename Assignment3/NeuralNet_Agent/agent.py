@@ -15,6 +15,9 @@ from nltk.stem import WordNetLemmatizer
 # Tensorflow models module to load in the model we trained
 from tensorflow.keras.models import load_model
 
+# Autocorrect -> spell check
+from autocorrect import Speller
+
 
 class Agent:
     """
@@ -29,6 +32,7 @@ class Agent:
 
         Methods:
             deconstructSentence(): deconstructs sentences into their root words.
+            spellCheck(): takes a sentence and corrects any spelling mistakes based on closest known word
             bagWords(): uses the deconstructed sentence to a series of words and maps it to a matching tag.
             predictResponse(): uses the chatbot model to return a response, with an associated probability.
             getResponse(): returns random bot response that has a greater probability than the minimum threshold.
@@ -40,20 +44,30 @@ class Agent:
         # Create a lemmatizer object
         self.lemmatizer = WordNetLemmatizer()
         # read in intents.json file
-        file = open('intents.json')
+        path = 'P:/COSC310 - Software Engineering/Projects/Projects/Assignment3/NeuralNet_Agent/'
+        file = open(path + 'intents.json')
         self.intents = json.loads(file.read())
         file.close()
         # load in the tags, and responses from the pickle files and load the saved model
-        file = open('tags.pk1', 'rb')
+        file = open(path + 'tags.pk1', 'rb')
         self.tags = pickle.load(file)
         file.close()
-        file = open('responses.pk1', 'rb')
+        file = open(path + 'responses.pk1', 'rb')
         self.responses = pickle.load(file)
         file.close()
-        self.model = load_model('chatbotmodel.h5')
-        self.extra = ["I'm sorry I didn't understand what you were asking", "Can you be more clear",
-                      "I'm sorry can you repeat what you are saying",
-                      "I'm sorry but the requirements are not clear", "Sorry, This task cannot be completed"]
+        self.model = load_model(path + 'chatbotmodel.h5')
+        self.check = Speller(lang='en')
+
+    def spellCheck(self, sentence):
+        """
+        This method takes a sentence and corrects any spelling mistakes based on closest known word
+        Parameters:
+            sentence (str): a sentence of user input
+        Returns:
+            corrected (str): a spell corrected sentence
+        """
+        corrected = self.check(sentence)
+        return corrected
 
     def deconstructSentence(self, sentence):
         """
@@ -65,7 +79,9 @@ class Agent:
             separatedWords (list): a list containing individual root words of a given sentence
         """
         separatedWords = nltk.word_tokenize(sentence.lower())
+        # print(separatedWords)
         separatedWords = [self.lemmatizer.lemmatize(word) for word in separatedWords]
+        # print(separatedWords)
         return separatedWords
 
     def bagWords(self, sentence):
@@ -109,6 +125,7 @@ class Agent:
         potentialReponses = []
         for r in predictedResponses:
             potentialReponses.append({'intent': self.responses[r[0]], 'probability': str(r[1])})
+        # print(potentialReponses)
         return potentialReponses
 
     def getResponse(self, userSentence):
@@ -138,9 +155,12 @@ class Agent:
               "or the type of issue you are having, to begin.")
         while True:
             userInput = input("Enter text: ")
-            if userInput.lower() == 'quit':
+            correctedInput = self.spellCheck(userInput)
+            print(correctedInput)
+
+            if correctedInput.lower() == 'quit':
                 break
-            intentions = self.predictResponse(userInput)
+            intentions = self.predictResponse(correctedInput)
             botResponse = self.getResponse(intentions)
             print("Agent: " + botResponse)
 

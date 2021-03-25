@@ -38,14 +38,19 @@ class ChatApplication:
         line.place(relwidth=1, rely=0.07, relheight=0.012)
 
         # text widget
-        self.text_widget = Text(self.window, width=20, height=2, bg=BG_COLOR, fg=TEXT_COLOR,
-                                font=FONT, padx=5, pady=5)
+        self.text_widget = Text(self.window, width=30, height=2, bg=BG_COLOR, fg=TEXT_COLOR,
+                                font=FONT, padx=0, pady=0)
         self.text_widget.place(relheight=0.745, relwidth=1, rely=0.08)
+        self.text_widget.configure(state=NORMAL)
+
+        intro_msg = "Welcome, we are here to help you with your computer issues. Please type \"Hello\" or the type " \
+                    "of issue you are having, to begin.\n\n"
+        self.text_widget.insert(END, intro_msg)
         self.text_widget.configure(cursor="arrow", state=DISABLED)
 
         # scroll bar
         scrollbar = Scrollbar(self.text_widget)
-        scrollbar.place(relheight=1, relx=0.974)
+        scrollbar.pack(side=RIGHT, fill=Y)
         scrollbar.configure(command=self.text_widget.yview)
 
         # bottom label
@@ -71,7 +76,7 @@ class ChatApplication:
     def _insert_message(self, msg, sender):
         if not msg:
             return  # if there is no text entered
-
+        msg = self.agent.spellCheck(msg)
         self.msg_entry.delete(0, END)
         msg1 = f"{sender}: {msg}\n\n"
         self.text_widget.configure(state=NORMAL)
