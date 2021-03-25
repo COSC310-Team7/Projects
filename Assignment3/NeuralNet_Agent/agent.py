@@ -15,6 +15,9 @@ from nltk.stem import WordNetLemmatizer
 # Tensorflow models module to load in the model we trained
 from tensorflow.keras.models import load_model
 
+# Autocorrect -> spell check
+from autocorrect import Speller
+
 
 class Agent:
     """
@@ -51,6 +54,10 @@ class Agent:
         self.responses = pickle.load(file)
         file.close()
         self.model = load_model('chatbotmodel.h5')
+
+    def spellCheck(self, sentence):
+        self.check = Speller(lang='en')
+        return self.check(sentence)
 
     def deconstructSentence(self, sentence):
         """
@@ -136,9 +143,11 @@ class Agent:
               "or the type of issue you are having, to begin.")
         while True:
             userInput = input("Enter text: ")
-            if userInput.lower() == 'quit':
+            correctedInput = self.spellCheck(userInput)
+
+            if correctedInput.lower() == 'quit':
                 break
-            intentions = self.predictResponse(userInput)
+            intentions = self.predictResponse(correctedInput)
             botResponse = self.getResponse(intentions)
             print("Agent: " + botResponse)
 
