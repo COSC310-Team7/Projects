@@ -15,6 +15,7 @@ from nltk.stem import WordNetLemmatizer
 # Natural language tool kit corpus module -> for synonyms
 from nltk.corpus import wordnet
 
+
 # Import models from tensor, layers and optimizers modules
 from tensorflow.keras.models import Sequential
 # Neural net layers
@@ -70,7 +71,7 @@ class Model:
             A new set containing the synonyms of all nouns and adjectives of the input string
 
         Examples
-        >>> synonyms("I am having software problems")
+        synonyms("I am having software problems")
         ['software', 'problem', 'trouble']
         """
         # Turn the string into an object with parts of speech tagging on each word
@@ -197,7 +198,7 @@ class Model:
         model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
         # training the model 200 times, and save the model as an '.h5' model and print done
-        chatbot = model.fit(np.array(trainX), np.array(trainY), epochs=300, batch_size=5, verbose=1)
+        chatbot = model.fit(np.array(trainX), np.array(trainY), epochs=200, batch_size=5, verbose=1)
         model.save('chatbotmodel.h5', chatbot)
         return "Done"
 

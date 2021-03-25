@@ -51,6 +51,9 @@ class Agent:
         self.responses = pickle.load(file)
         file.close()
         self.model = load_model('chatbotmodel.h5')
+        self.extra = ["I'm sorry I didn't understand what you were asking", "Can you be more clear",
+                      "I'm sorry can you repeat what you are saying",
+                      "I'm sorry but the requirements are not clear", "Sorry, This task cannot be completed"]
 
     def deconstructSentence(self, sentence):
         """
@@ -129,9 +132,8 @@ class Agent:
     def run(self):
         """
         This methods receives user input, and uses the predictResponse methods to determine what the user's intention
-        is, then uses the getresponse methods to determine an ideal response to return.
+        is, then uses the getResponse methods to determine an ideal response to return.
         """
-
         print("Welcome, we are here to help you with your computer issues. Please type \"Hello\" "
               "or the type of issue you are having, to begin.")
         while True:
