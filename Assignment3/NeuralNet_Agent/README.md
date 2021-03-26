@@ -13,7 +13,7 @@ When using the Neural Net, it gets some input from the user, converts the input 
 
 ## Setting up Neural Net Agent
 * Clone 'Assignment3' onto PC  
-* Open the 'NeuralNet Agent' folder in a Python IDE  
+* Open the 'NeuralNet_Agent' folder in a Python IDE  
 * In terminal enter: 
   > ```pip install nltk```  
   > ```pip install tensorflow```  
@@ -35,13 +35,14 @@ The Agent class is located in the agent.py file. The Agent class has the followi
   * ```tags (list): A list containing all the response type tags from a pickle object.```
   * ```responses (list): A list containing all the responses from a pickle object.```
   * ```model (object): An object containing a trained model.```
+  * ```check (method): A method that autocorrects spelling mistakes```
 * Methods:
+  * ```spellCheck(): takes a sentence and corrects any spelling mistakes based on closest known word```
   * ```deconstructSentence(): deconstructs sentences into their root words.```
   * ```bagWords(): uses the deconstructed sentence to a series of words and maps it to a matching tag.```
   * ```predictResponse(): uses the chatbot model to return a response, with an associated probability.```
   * ```getResponse(): returns random bot response that has a greater probability than the minimum threshold.```
   * ```run(): runs the chatbot.```
-  
 ## Model Class
 The Model class is located in the train.py file. The Agent class has the following structure:
 * Attributes:
@@ -72,18 +73,20 @@ The ChatApplication class is located in the app.py file. This class has the foll
 * **Note**: Do not be concerned with errors thrown in command console, there are some issues with the tensorflow library that do not affect the chatbot.
 
 ## Running chatbot
-* Compile agent.py
+* Compile 'GUI.py'
 * **Note**: Do not be concerned with errors thrown in command console, there are some issues with the tensorflow library that do not affect the chatbot.
 
 ## List of Files
 * **agent.py** *Runs the conversation agent program and takes in inputs to speak to it*
-* **agent_unittest.py** *Runs a unit test on the Agent class*
+* **unittest.py** *Runs a unit test on the Agent class*
 * **train.py** *Compiles the data from the intents.json*
 * **playground.py** *Test file for visualizing functionality of POS tagging and synonym recognition*
 * **intents.json** *Database that stores tags, corresponding patterns, corresponding responses*
 * **tags.pk1** *Stores the character stream of tags to be reconstructed later for the agent script*
 * **responses.pk1** *Stores the character stream of responses to be reconstructed later for the agent script*
 * **chatbotmodel.h5** *Trains the tags to have higher probabilities for certain words that consistently appear in its patterns and stores this information as a hierarchical data structure*
+* **playgrounds.py** Tests how POS tagging and synonyms can be used in conjunction
+* **GUI.py** Compiles the GUI for the chat bot
 ##  Imports 
 * Random
 * JSON 
@@ -93,7 +96,9 @@ The ChatApplication class is located in the app.py file. This class has the foll
   * Stem
   * Corpus
 * TensorFlow
-* spaCy
+* spacy
+* autocorrect
+* unittest
 
 ## List of features
 Each features that will be mentioned below will include a rationale as to why it has been chosen and a snippet of the feature in action.
@@ -101,11 +106,19 @@ Each features that will be mentioned below will include a rationale as to why it
 ### GUI
 Simple GUI developed to run the program where user can view converstation history. This allows for a cleaner interaction.
 
+![GUI](C:\Users\Pawan\Desktop\Cosc310images\GUI.PNG)
+
 ### Stemming & Lemmatization
 Stemming & lemmatization attempts to find the base or dictionary form of a word. It does simple stuff of stemming a word from 'cars' to 'car' and it also uses the proper vocabulary of a word to convert it from 'am, are, is' to 'be' using lemmatization. The purpose is to reduce the vocabulary of the model and attempt to find the more general meaning behind sentences of the model and the input.
 
+![Lemmatization](C:\Users\Pawan\Desktop\Cosc310images\Lemmatization.PNG)
+
 ### POS Tagging
-Parts of speech (pos) tagging uses ai to recognize a sentence structure and correctly label the pronouns, nouns, verbs, adjectives etc., of each word in a sentence. It was analyzed that replacing nouns and adjectives in a sentence with synonymous words still portrayed the correct sentence structure and intention. Pos tagging was used to find and single out these words that were given to the model.
+Parts of speech (POS) tagging uses AI to recognize a sentence structure and correctly label the pronouns, nouns, verbs, adjectives etc., of each word in a sentence. It was analyzed that replacing nouns and adjectives in a sentence with synonymous words still portrayed the correct sentence structure and intention. POS tagging was used to find and single out these words that were given to the model.
+
+![POStaggingAndSynonyms](C:\Users\Pawan\Desktop\Cosc310images\POStaggingAndSynonyms.PNG)
 
 ### Synonym Recognition
-Synonym recognition can gather a list of synonyms of a word depending on its intention as a verb, noun, adjective, etc. The nouns and adjectives found using pos tagging were used to get a list of their respective noun or adjective synonyms. It can recognize the noun of 'problems' in 'computer problems' and get the synonym as 'issues' and add it the the recognized input of that intention. This addition improves upon the basic patterns and sentence structure of the original recognized input pattern and enhances it with an increased vocabulary. 
+Synonym recognition can gather a list of synonyms of a word depending on its intention as a verb, noun, adjective, etc. The nouns and adjectives found using POS tagging were used to get a list of their respective noun or adjective synonyms. It can recognize the noun of 'problems' in 'computer problems' and get the synonym as 'issues' and add it the the recognized input of that intention. This addition improves upon the basic patterns and sentence structure of the original recognized input pattern and enhances it with an increased vocabulary. 
+
+![Synonyms](C:\Users\Pawan\Desktop\Cosc310images\Synonyms.PNG)

@@ -15,6 +15,7 @@ from nltk.stem import WordNetLemmatizer
 # Natural language tool kit corpus module -> for synonyms
 from nltk.corpus import wordnet
 
+
 # Import models from tensor, layers and optimizers modules
 from tensorflow.keras.models import Sequential
 # Neural net layers
@@ -49,7 +50,8 @@ class Model:
         # Create a lemmatizer object
         self.lemmatizer = WordNetLemmatizer()
         # read in intents.json file
-        self.intents = json.loads(open('intents.json').read())
+        path = 'P:/COSC310 - Software Engineering/Projects/Projects/Assignment3/NeuralNet_Agent/'
+        self.intents = json.loads(open(path + 'intents.json').read())
         # tags contains the list of all tags
         self.tags = []
         # responses contains the list of responses
@@ -70,7 +72,7 @@ class Model:
             A new set containing the synonyms of all nouns and adjectives of the input string
 
         Examples
-        >>> synonyms("I am having software problems")
+        synonyms("I am having software problems")
         ['software', 'problem', 'trouble']
         """
         # Turn the string into an object with parts of speech tagging on each word
@@ -80,6 +82,7 @@ class Model:
 
         # iterate through the sentence
         for word in sen:
+            # print(word, word.pos_)
             if word.pos_ == "NOUN":
                 # print(f'{word.text:{12}} {word.pos_:{10}} {word.tag_:{8}} {spacy.explain(word.tag_)}')
                 # print(wordnet.synsets(word.text, pos=wordnet.NOUN))
@@ -97,20 +100,23 @@ class Model:
 
     def train(self):
         # list containing punctuation to Ignore
-        ignoreChars = ['?', '!', '.', ',', '\'', '\'s', '\'m', 'n\'t']
+        ignoreChars = ['?', '!', '.', ',', '\'']
         # iterate through the dictionary
         for intent in self.intents['intents']:
             # find each list of patterns
             for pattern in intent['patterns']:
                 # Split the sentence into individual words
                 wordList = nltk.word_tokenize(pattern)
+                # print(wordList)
                 # Get synonyms of nouns and adjectives in wordlist
                 synonymlist = self.synonyms(pattern)
                 # Add each synonym to the word list
-                wordList.extend(synonymlist)
-                print(pattern)
-                print(wordList)
-                print()
+                # print(synonymlist)
+                if synonymlist is not None:
+                    wordList.extend(synonymlist)
+                # print(wordList)
+                # print(wordList)
+                # print()
                 # add each word to the tags list
                 self.tags.extend(wordList)
                 # add each list of wordlist and the associated tag to patterns
@@ -193,11 +199,11 @@ class Model:
         # Stochastic gradient descent optimization algorithm with a learning rate of 0.01
         # decay of 0.000001, momentum of 0.9, and nesterov momentum set to true
 
-        sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
+        sgd = SGD(lr=0.001, decay=1e-6, momentum=0.9, nesterov=True)
         model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
         # training the model 200 times, and save the model as an '.h5' model and print done
-        chatbot = model.fit(np.array(trainX), np.array(trainY), epochs=300, batch_size=5, verbose=1)
+        chatbot = model.fit(np.array(trainX), np.array(trainY), epochs=300, batch_size=2, verbose=1)
         model.save('chatbotmodel.h5', chatbot)
         return "Done"
 
