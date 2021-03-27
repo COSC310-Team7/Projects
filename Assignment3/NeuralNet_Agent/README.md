@@ -106,19 +106,26 @@ Each features that will be mentioned below will include a rationale as to why it
 ### GUI
 Simple GUI developed to run the program where user can view converstation history. This allows for a cleaner interaction.
 
-![GUI](images\GUI.PNG)
+![GUI](images/GUI.PNG)
 
 ### Stemming & Lemmatization
 Stemming & lemmatization attempts to find the base or dictionary form of a word. It does simple stuff of stemming a word from 'cars' to 'car' and it also uses the proper vocabulary of a word to convert it from 'am, are, is' to 'be' using lemmatization. The purpose is to reduce the vocabulary of the model and attempt to find the more general meaning behind sentences of the model and the input.
 
-![Lemmatization](images\Lemmatization.PNG)
+![Lemmatization](images/Lemmatization.PNG)
 
 ### POS Tagging
 Parts of speech (POS) tagging uses AI to recognize a sentence structure and correctly label the pronouns, nouns, verbs, adjectives etc., of each word in a sentence. It was analyzed that replacing nouns and adjectives in a sentence with synonymous words still portrayed the correct sentence structure and intention. POS tagging was used to find and single out these words that were given to the model.
 
-![POStaggingAndSynonyms](images\POStaggingAndSynonyms.PNG)
+![POStaggingAndSynonyms](images/POStaggingAndSynonyms.PNG)
 
 ### Synonym Recognition
 Synonym recognition can gather a list of synonyms of a word depending on its intention as a verb, noun, adjective, etc. The nouns and adjectives found using POS tagging were used to get a list of their respective noun or adjective synonyms. It can recognize the noun of 'problems' in 'computer problems' and get the synonym as 'issues' and add it the the recognized input of that intention. This addition improves upon the basic patterns and sentence structure of the original recognized input pattern and enhances it with an increased vocabulary. 
 
-![Synonyms](images\Synonyms.PNG)
+![Synonyms](images/Synonyms.PNG)
+
+### Autocorrect
+Spell checking was implemented through the Autocorrect package. The implementation is a function that takes the sentence the user inputs and checks the spelling of each word against the english dictionary. If any mistakes are detected it will attempt to identify the closest word to the incorrectly spelled one.
+
+![Autocorrect](images/SpellCheck_part1.PNG)
+
+![Autocorrect](images/SpellCheck_part2.PNG)
