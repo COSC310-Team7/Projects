@@ -1,11 +1,6 @@
-# Projects
-Computer science 310 project repository  
-### Includes:
-* Assignment 2
-* Assignment 3
-### Team 7
-* Dylan Molloy
-* Mike Zhai
-* Omar Mourad
-* Pawan Bilkhu
-* Solomon Ebata
+# Version Library
+### NeuralNet Agent
+Most up to date version of our working conversational agent
+
+### Prototypes
+Where the first three prototypes were worked on then discarded
